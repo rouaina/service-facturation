@@ -4,7 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 // Ajoute cette ligne :
 //use Roshandelpoor\LaravelEurekaDiscovery\EurekaService;
-use App\Services\EurekaService;
+//use App\Services\EurekaService;
 use Illuminate\Support\Facades\URL; // ← Ajoute cette ligne
 
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
       
         \Illuminate\Support\Facades\Schema::defaultStringLength(191);
 
-        EurekaService::register();
+      //  EurekaService::register();
         if (app()->environment('production')) {
             URL::forceScheme('https');
         }
