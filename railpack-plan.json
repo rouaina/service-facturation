@@ -1,0 +1,18 @@
+{
+  "extensions": [
+    "pdo_mysql",
+    "ctype",
+    "curl",
+    "dom",
+    "fileinfo",
+    "filter",
+    "hash",
+    "mbstring",
+    "openssl",
+    "pcre",
+    "pdo",
+    "session",
+    "tokenizer",
+    "xml"
+  ]
+}
