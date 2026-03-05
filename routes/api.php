@@ -18,6 +18,12 @@ use App\Http\Controllers\API\FinanceController;
 |
 */
 
+// LOG AU TOUT DÉBUT
+error_log("=== DÉMARRAGE DE L'APPLICATION ===");
+error_log("Heure: " . date('Y-m-d H:i:s'));
+error_log("Fichier: " . __FILE__);
+
+
 Route::prefix('commandes')->group(function () {
     Route::post('/', [CommandeController::class, 'creer']);       // POST /api/commandes
     Route::get('/', [CommandeController::class, 'lister']);       // GET  /api/commandes
@@ -46,3 +52,5 @@ Route::get('/paiement-form', function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
