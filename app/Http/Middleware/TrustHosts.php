@@ -15,8 +15,10 @@ class TrustHosts extends Middleware
     {
         return [
             $this->allSubdomainsOfApplicationUrl(),
-             // Ajoutez explicitement le hostname de healthcheck
-           'healthcheck.railway.app',
+            'healthcheck.railway.app', // Essentiel pour Railway
+            'localhost',
+            '127.0.0.1',
+            '*.up.railway.app', // Tous les sous-domaines Railway
         ];
     }
 }
