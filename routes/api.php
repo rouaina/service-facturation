@@ -7,6 +7,11 @@ use App\Http\Controllers\API\PaiementController;
 use App\Http\Controllers\API\FactureController;
 use App\Http\Controllers\API\FinanceController;
 
+
+use App\Http\Controllers\API\RemiseController;
+use App\Http\Controllers\API\RemboursementController;
+use App\Http\Controllers\API\AbonnementController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -48,6 +53,10 @@ Route::get('/paiement-form', function () {
 });
 
 
+
+Route::apiResource('remises', App\Http\Controllers\API\RemiseController::class);
+Route::apiResource('remboursements', App\Http\Controllers\API\RemboursementController::class);
+Route::apiResource('abonnements', App\Http\Controllers\API\AbonnementController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
