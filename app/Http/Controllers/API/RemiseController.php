@@ -23,14 +23,15 @@ class RemiseController extends Controller
         //
 
          {
-        $validated = $request->validate([
+         $validated = $request->validate([
             'code' => 'nullable|string|unique:remises',
-            'type' => 'required|in:pourcentage,fixe',
+            'type' => 'required|in:pourcentage,montant_fixe',
             'valeur' => 'required|numeric|min:0',
             'date_debut' => 'nullable|date',
-            'date_fin' => 'nullable|date|after:date_debut',
+            'date_fin' => 'nullable|date|after_or_equal:date_debut',
             'actif' => 'boolean',
         ]);
+
 
         $remise = Remise::create($validated);
         return response()->json($remise, 201);
@@ -53,12 +54,12 @@ class RemiseController extends Controller
         //
 
          {
-        $validated = $request->validate([
+          $validated = $request->validate([
             'code' => 'nullable|string|unique:remises,code,' . $remise->id,
-            'type' => 'sometimes|in:pourcentage,fixe',
+            'type' => 'sometimes|in:pourcentage,montant_fixe',
             'valeur' => 'sometimes|numeric|min:0',
             'date_debut' => 'nullable|date',
-            'date_fin' => 'nullable|date|after:date_debut',
+            'date_fin' => 'nullable|date|after_or_equal:date_debut',
             'actif' => 'boolean',
         ]);
 
@@ -72,8 +73,9 @@ class RemiseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+      public function destroy(Remise $remise)
     {
-        //
+        $remise->delete();
+        return response()->json(null, 204);
     }
 }
