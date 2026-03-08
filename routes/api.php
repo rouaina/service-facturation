@@ -54,9 +54,39 @@ Route::get('/paiement-form', function () {
 
 
 
-Route::apiResource('remises', App\Http\Controllers\API\RemiseController::class);
-Route::apiResource('remboursements', App\Http\Controllers\API\RemboursementController::class);
-Route::apiResource('abonnements', App\Http\Controllers\API\AbonnementController::class);
+
+// Remises
+Route::prefix('remises')->group(function () {
+    Route::get('/', [App\Http\Controllers\API\RemiseController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\API\RemiseController::class, 'store']);
+    Route::get('{remise}', [App\Http\Controllers\API\RemiseController::class, 'show']);
+    Route::put('{remise}', [App\Http\Controllers\API\RemiseController::class, 'update']);
+    Route::delete('{remise}', [App\Http\Controllers\API\RemiseController::class, 'destroy']);
+    Route::post('appliquer', [App\Http\Controllers\API\RemiseController::class, 'appliquer']);
+    Route::post('valider-code', [App\Http\Controllers\API\RemiseController::class, 'validerCode']);
+});
+
+// Remboursements
+Route::prefix('remboursements')->group(function () {
+    Route::get('/', [App\Http\Controllers\API\RemboursementController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\API\RemboursementController::class, 'store']);
+    Route::get('{remboursement}', [App\Http\Controllers\API\RemboursementController::class, 'show']);
+    Route::put('{remboursement}', [App\Http\Controllers\API\RemboursementController::class, 'update']);
+    Route::delete('{remboursement}', [App\Http\Controllers\API\RemboursementController::class, 'destroy']);
+});
+
+// Abonnements
+Route::prefix('abonnements')->group(function () {
+    Route::get('/', [App\Http\Controllers\API\AbonnementController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\API\AbonnementController::class, 'store']);
+    Route::get('{abonnement}', [App\Http\Controllers\API\AbonnementController::class, 'show']);
+    Route::put('{abonnement}', [App\Http\Controllers\API\AbonnementController::class, 'update']);
+    Route::delete('{abonnement}', [App\Http\Controllers\API\AbonnementController::class, 'destroy']);
+    Route::post('{abonnement}/renouveler', [App\Http\Controllers\API\AbonnementController::class, 'renouveler']);
+    Route::post('{abonnement}/generer-commande', [App\Http\Controllers\API\AbonnementController::class, 'genererCommande']);
+});
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

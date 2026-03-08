@@ -26,3 +26,7 @@ Route::get('/health', function () {
 Route::get('/santé', function () {
     return response()->json(['status' => 'ok']);
 });
+
+
+
+
