@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL; // ← Ajoute cette ligne
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\UrlGenerator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,15 +24,19 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(UrlGenerator $url)
     {
         //Schema::defaultStringLength(191);
       
         \Illuminate\Support\Facades\Schema::defaultStringLength(191);
 
       //  EurekaService::register();
-        if (app()->environment('production')) {
-            URL::forceScheme('https');
+        // if (app()->environment('production')) {
+            // URL::forceScheme('https');
+        // }
+
+         if (env('APP_ENV') == 'production') {
+            $url->forceScheme('https');
         }
     }
 
