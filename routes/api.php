@@ -93,3 +93,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'message' => 'API Service Facturation fonctionne',
+        'time' => now()
+    ]);
+});
+
